@@ -9,6 +9,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.db.models import Q
 
+
 def index(request):
     if request.GET.get("id"):
         id = request.GET.get("id")
@@ -57,6 +58,9 @@ def index(request):
         return HttpResponse(index.render(context, request))
 
 def increment_download_count(request, id):
+    '''
+    increases download count by 1.
+    '''
     schematic = schematics.objects.filter(id=id).values()
     if not schematic:
         raise Http404
@@ -67,6 +71,10 @@ def increment_download_count(request, id):
         return HttpResponseRedirect(model.fileLink)
 
 def human_format(num):
+    '''
+    turns numbers bigger than 1000 to a human readable format (num < quadrillion):
+    e.g. 1000 -> 1k, 100,000,000 -> 100M
+    '''
     if num < 1000:
         return str(num)
     num = float('{:.3g}'.format(num))

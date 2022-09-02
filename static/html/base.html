@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"></link>    
+    <script src="{% static 'js/index.js' %}"></script>
+    <title>LazyMC</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header-wrapper">
+            <div class="header-button" onclick="location.href='/'">Home</div>
+            <div class="header-button" onclick="location.href='/schematics'">Schematics</div>
+            <div class="header-button" onclick="location.href='categories'">Categories</div>
+        </div>
+        <i class="moon-icon fas fa-moon icon" onclick="toggleTheme()"></i>
+    </header>
+    <div class="content">
+    {% block content %}
+    {% endblock %}
+    </div>
+    <footer>
+        <div class="footer">
+            <div class="footer-wrapper">
+                <p class="copyright">
+                    © LazyMC
+                </p>
+                <i class="moon-icon fas fa-moon icon" onclick="toggleTheme()"></i>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

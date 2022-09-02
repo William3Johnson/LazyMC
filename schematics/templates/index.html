@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+{% for x in page_content.object_list %}
+{% include 'item.html' %}
+{% endfor %}
+
+<div class="sort-box">
+    
+</div>
+<div class="paginator-wrapper">
+    {%if page_content.has_previous %}
+    <div class="previous paginator-button" onclick="location.href='?page={{page_content.previous_page_number}}'">
+        <i class="fas fa-angle-left icon"></i>
+    </div>
+    {% endif %}
+    <span class="">{{page_content.number}}</span>
+    {%if page_content.has_next %}
+    <div class="next paginator-button" onclick="location.href='?page={{page_content.next_page_number}}'">
+        <i class="fas fa-angle-right icon"></i>
+    </div>
+    {% endif %}
+    </div>
+
+{% endblock %}

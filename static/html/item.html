@@ -1,0 +1,16 @@
+{% load humanize %}
+<div class="item">
+    <div class="item-img-wrapper">
+        <img src=" {{ x.image }}" alt="{{ x.title }}" class="thumbnail">
+    </div>
+    <div class="item-text-wrapper">
+        <a class="title" href='?id={{ x.id }}'>{{ x.title }}</a>
+        <p class="datetime">{{ x.currentDateTime|naturaltime }}</p>
+        <a class="short-description" href='?id={{ x.id }}'>{{ x.shortDescription }}</a>
+        <div class="category">{{ x.category }}</div>
+        <form action="download/{{ x.id }}" method="post">
+            {% csrf_token %}
+            <button class="download" type="submit">Download</button>
+        </form>
+    </div>
+</div>

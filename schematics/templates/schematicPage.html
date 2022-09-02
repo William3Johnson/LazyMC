@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+{% for x in schematic %}
+<div class="info-card">
+    <img src="{{ x.image }}" alt="{{ x.title }} thumbnail" class="thumbnail">
+    <p class="title">{{ x.title }}</p>
+    <div class="short-description">{{ x.shortDescription }} {{ downloadCountHR }}</div>
+    <hr class="line">
+    <p class="download-count"><b>{{ x.downloadCountHR }}</b> downloads</p>
+    <p class="datetime" title="{{ x.currentDateTime }}">created {{ x.currentDateTime|naturaltime }}</p>
+    <form action="download/{{ x.id }}" method="post">
+        {% csrf_token %}
+        <button class="download" type="submit">Download</button>
+    </form>
+    <hr class="line">
+    {% if x.sourceType == "downloadedMap"%}
+        {% with sourceType="Map from" %}
+        <p class="source-text"><b>Source</b>({{ sourceType }}): </p>
+        {% endwith %}
+    {% elif x.sourceType == "downloadedSchematic" %}
+        {% with sourceType="Schematic from" %}
+        <p class="source-text"><b>Source</b>({{ sourceType }}): </p>
+        {% endwith %}
+    {% endif %}
+    <div class="source" onclick="location.href='{{ x.sourceLink }}'">{{ x.sourceLink }}</div>
+</div>
+<div class="text-wrapper">
+    <div class="description">
+        {{ x.description | safe }}
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
